@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,6 +27,9 @@ public class Fire : MonoBehaviour
         {
             if (item.gameObject.tag == "Bomb") {
                 item.GetComponent<Bomb>().Explode();
+            }
+            if (item.gameObject.tag == "Player") {
+                item.GetComponent<Player>().Die();
             }
         }
     }
