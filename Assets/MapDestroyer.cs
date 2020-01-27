@@ -36,10 +36,7 @@ public class MapDestroyer : MonoBehaviour
     {
         Tile tile = tilemap.GetTile<Tile>(cell);
 
-        if (tile == wallTile)
-        {
-            return false;
-        }
+        if (tile == wallTile) return false;
 
         Vector3 explosionPos = tilemap.GetCellCenterWorld(cell);
         Instantiate(explosion, explosionPos, Quaternion.identity);

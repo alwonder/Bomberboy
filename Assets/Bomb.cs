@@ -30,8 +30,12 @@ public class Bomb : MonoBehaviour
     {
         countdown -= Time.deltaTime;
         if (countdown <= 0f) {
-            FindObjectOfType<MapDestroyer>().Explode(gameObject.transform.localPosition, explosionPower);
-            Destroy(gameObject);
+            Explode();
         }
+    }
+
+    public void Explode() {
+        FindObjectOfType<MapDestroyer>().Explode(gameObject.transform.localPosition, explosionPower);
+        Destroy(gameObject);
     }
 }

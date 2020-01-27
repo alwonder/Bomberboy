@@ -9,9 +9,25 @@ public class Fire : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Damage();
+
         countdown -= Time.deltaTime;
         if (countdown <= 0f) {
             Destroy(gameObject);
+        }
+    }
+
+    private void Damage() {
+        BoxCollider2D boxCollider = GetComponent<BoxCollider2D>();
+        Vector3 pointA = boxCollider.bounds.min + new Vector3(0.1f, 0.1f);
+        Vector3 pointB = boxCollider.bounds.max - new Vector3(0.1f, 0.1f);
+        Collider2D[] overlap = Physics2D.OverlapAreaAll(pointA, pointB);
+
+        foreach (Collider2D item in overlap)
+        {
+            if (item.gameObject.tag == "Bomb") {
+                item.GetComponent<Bomb>().Explode();
+            }
         }
     }
 }
