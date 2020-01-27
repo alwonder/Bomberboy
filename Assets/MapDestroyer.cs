@@ -38,8 +38,18 @@ public class MapDestroyer : MonoBehaviour
 
         if (tile == wallTile) return false;
 
+        Collider2D[] overlap = Physics2D.OverlapCircleAll(tilemap.GetCellCenterWorld(cell), 0.1f);
+        foreach (Collider2D item in overlap)
+        {
+            if (item.gameObject.tag == "Fire") {
+                return false;
+            }
+        }
+
         Vector3 explosionPos = tilemap.GetCellCenterWorld(cell);
-        Instantiate(explosion, explosionPos, Quaternion.identity);
+        GameObject fire = Instantiate(explosion, explosionPos, Quaternion.identity);
+        fire.GetComponent<Fire>().Damage();
+
         
         if (tile == destructibleTile)
         {

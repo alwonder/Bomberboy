@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,7 +17,7 @@ public class Fire : MonoBehaviour
         }
     }
 
-    private void Damage() {
+    public void Damage() {
         BoxCollider2D boxCollider = GetComponent<BoxCollider2D>();
         Vector3 pointA = boxCollider.bounds.min + new Vector3(0.1f, 0.1f);
         Vector3 pointB = boxCollider.bounds.max - new Vector3(0.1f, 0.1f);
