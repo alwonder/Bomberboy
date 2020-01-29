@@ -31,6 +31,9 @@ public class Fire : MonoBehaviour
             if (item.gameObject.tag == "Player") {
                 item.GetComponent<Player>().Die();
             }
+            if (item.gameObject.tag == "Enemy") {
+                item.GetComponent<Enemy>().Die();
+            }
         }
     }
 }
