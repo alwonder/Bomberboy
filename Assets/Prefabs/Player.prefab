@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 9178333183922114315}
   - component: {fileID: 5979434786564739726}
   - component: {fileID: 1265323714839405331}
+  - component: {fileID: 4418661183413196036}
+  - component: {fileID: 1955382212}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -152,3 +154,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 3
+--- !u!114 &4418661183413196036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9178333183922114314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4800b1f8fffbe4bda8d51f6930043182, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilemap: {fileID: 0}
+  wallTile: {fileID: 11400000, guid: 5ab6604579bc9481ea432b2938cbb9dc, type: 2}
+  destructibleTile: {fileID: 11400000, guid: 9d09c0c74105b44f8911f6a600027a28, type: 2}
+  bombPrefab: {fileID: 1786963553037036772, guid: 94ce2b20532b54b818216645e185ff50,
+    type: 3}
+--- !u!114 &1955382212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9178333183922114314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68ef67e1aa2a84766955895caa184da5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilemap: {fileID: 0}
