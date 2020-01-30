@@ -14,41 +14,38 @@ public class EnemyMovement : MonoBehaviour
 {
     public Rigidbody2D rb;
     public float velocity = 2f;
-    public float raycastDistance = 0.36f;
     public float changeDirectionProbability = 0.3f;
     public float ChangeDirectionRepeatRate = 0.3f;
     public MoveDirection currentMoveDirection;
-    private Vector2 currentMoveVector;
-    private bool walkingAround = true;
-    private LayerMask raycastMask;
+    public Vector2 currentMoveVector;
+    private ObjectSeeker objectSeeker;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        raycastMask = LayerMask.GetMask("Walls", "Fire", "Bombs");
+        objectSeeker = GetComponent<ObjectSeeker>();
         SetDirection(GetRandomDirection());
-        InvokeRepeating("MaybeChangeDirection", ChangeDirectionRepeatRate, ChangeDirectionRepeatRate);
     }
 
-
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        WalkAround();
-    }
-
-    void WalkAround() {
-        if (hasObstaclesAhead(currentMoveVector))
-        {
-            SetDirection(GetRandomDirection());
-        }
-        
         rb.velocity = currentMoveVector * velocity;
     }
 
-    void FixedUpdate() {
-        
+    public void StartRandomMovement() {
+        InvokeRepeating("MaybeChangeDirection", ChangeDirectionRepeatRate, ChangeDirectionRepeatRate);
+    }
+
+    public void StopRandomMovement() {
+        CancelInvoke("MaybeChangeDirection");
+    }
+
+    public void WalkAround() {
+        if (objectSeeker.HasObstaclesAhead(currentMoveVector))
+        {
+            SetDirection(GetRandomDirection());
+        }
     }
 
     private void MaybeChangeDirection() {
@@ -57,15 +54,10 @@ public class EnemyMovement : MonoBehaviour
 
         Vector2 randomDirVector = GetMoveVector(GetRandomDirection());
         
-        if (!hasObstaclesAhead(randomDirVector))
+        if (!objectSeeker.HasObstaclesAhead(randomDirVector))
         {
             SetDirection(GetRandomDirection());
         }
-    }
-
-    private bool hasObstaclesAhead(Vector2 directionVector) {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, directionVector, raycastDistance, raycastMask);
-        return hit.collider != null;
     }
 
     public void SetDirection(MoveDirection direction) {
@@ -88,6 +80,23 @@ public class EnemyMovement : MonoBehaviour
                 throw new System.Exception();
         }
     }
+
+    public MoveDirection GetOppositeDirection(MoveDirection direction) {
+        switch (direction)
+        {
+            case MoveDirection.Up:
+                return MoveDirection.Down;
+            case MoveDirection.Down:
+                return MoveDirection.Up;
+            case MoveDirection.Left:
+                return MoveDirection.Right;
+            case MoveDirection.Right:
+                return MoveDirection.Left;
+            default:
+                throw new System.Exception();
+        }
+    }
+
 
     private MoveDirection GetRandomDirection() {
         return (MoveDirection)Random.Range(0, 4);
