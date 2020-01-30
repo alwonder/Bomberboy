@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3659626384244329937}
   - component: {fileID: 7090374619265372953}
   - component: {fileID: 460317956487519250}
+  - component: {fileID: 114028021086208780}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
@@ -132,3 +133,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   invincible: 0
+--- !u!114 &114028021086208780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7090374619265372952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca62dbeed44cc49e0800d14bca1ae872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 3659626384244329937}
+  velocity: 50
+  currentMoveDirection: 0

@@ -22,6 +22,11 @@ PrefabInstance:
       propertyPath: m_Icon
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7090374619265372953, guid: 1c1fc1b1b6eb140fd92e031e74473bce,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.31
+      objectReference: {fileID: 0}
     - target: {fileID: 7090374619265372954, guid: 1c1fc1b1b6eb140fd92e031e74473bce,
         type: 3}
       propertyPath: m_Sprite

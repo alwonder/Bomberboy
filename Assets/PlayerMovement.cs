@@ -6,37 +6,40 @@ public class PlayerMovement : MonoBehaviour
 {
 
     public float velocity = 3f;
-    public Rigidbody2D rb;
-    public Animator animator;
+    private Rigidbody2D rb;
+    private Animator animator;
+    private BombSpawner bombSpawner;
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        bombSpawner = GetComponent<BombSpawner>();
     }
 
     // Update is called once per frame
-    private void Update() {
+    private void FixedUpdate()
+    {
+        rb.velocity = new Vector2(0, 0);
+        float moveHorizontal = Input.GetAxisRaw("Horizontal");
+        float moveVertical = Input.GetAxisRaw("Vertical");
+
+        Vector2 movement = new Vector2 (moveHorizontal, moveVertical);
+
+        rb.velocity = movement * velocity;
+        
+     }
+
+     private void Update()
+     {
+        if (Input.GetKeyDown(KeyCode.Space))
+            bombSpawner.Spawn();
+
         animator.SetFloat("Speed", rb.velocity.magnitude);
 
         if (rb.velocity.x > 0.1)
             GetComponent<SpriteRenderer>().flipX = false;
         if (rb.velocity.x < -0.1)
             GetComponent<SpriteRenderer>().flipX = true;
-
-        rb.velocity = new Vector2(0, 0);
-        if (Input.GetKey(KeyCode.LeftArrow))
-            rb.velocity += new Vector2(-velocity, 0);
-            // rb.AddForce(Vector3.left);
-        if (Input.GetKey(KeyCode.RightArrow))
-            rb.velocity += new Vector2(velocity, 0);
-            // rb.AddForce(Vector3.right);
-        if (Input.GetKey(KeyCode.UpArrow))
-            rb.velocity += new Vector2(0, velocity);
-            // rb.AddForce(Vector3.up);
-        if (Input.GetKey(KeyCode.DownArrow))
-            rb.velocity += new Vector2(0, -velocity);
-        if (Input.GetKeyDown(KeyCode.Space))
-            GetComponent<BombSpawner>().Spawn();
-        
      }
 }
