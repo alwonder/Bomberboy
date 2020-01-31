@@ -149,10 +149,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 3659626384244329937}
   velocity: 2
-  raycastDistance: 0.36
   changeDirectionProbability: 0.3
   ChangeDirectionRepeatRate: 0.3
   currentMoveDirection: 0
+  currentMoveVector: {x: 0, y: 0}
 --- !u!95 &5768028335726319589
 Animator:
   serializedVersion: 3
@@ -184,3 +184,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1cd68e227a8042cf9fa4b58d5813b58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  obstacleRaycastDistance: 0.36
+  bombRaycastDistance: 3
+  bombSafeDistance: 4

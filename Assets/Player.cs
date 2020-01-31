@@ -9,7 +9,6 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = tilemap.GetComponent<GameField>().GetPlayerStartPosition();
     }
 
     // Update is called once per frame
