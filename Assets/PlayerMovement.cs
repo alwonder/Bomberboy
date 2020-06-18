@@ -1,45 +1,39 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+  public float velocity = 3f;
+  private Rigidbody2D rb;
+  private Animator animator;
+  private BombSpawner bombSpawner;
+  private Vector2 velocityVector = new Vector2(0, 0);
 
-    public float velocity = 3f;
-    private Rigidbody2D rb;
-    private Animator animator;
-    private BombSpawner bombSpawner;
-    // Start is called before the first frame update
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
-        bombSpawner = GetComponent<BombSpawner>();
-    }
+  // Start is called before the first frame update
+  void Start()
+  {
+    rb = GetComponent<Rigidbody2D>();
+    animator = GetComponent<Animator>();
+    bombSpawner = GetComponent<BombSpawner>();
+  }
 
-    // Update is called once per frame
-    private void FixedUpdate()
-    {
-        rb.velocity = new Vector2(0, 0);
-        float moveHorizontal = Input.GetAxisRaw("Horizontal");
-        float moveVertical = Input.GetAxisRaw("Vertical");
+  public void SetVelocity(Vector2 movement)
+  {
+    velocityVector = movement * velocity;
+  }
 
-        Vector2 movement = new Vector2 (moveHorizontal, moveVertical);
+  public void PlaceBomb()
+  {
+    bombSpawner.Spawn();
+  }
 
-        rb.velocity = movement * velocity;
-        
-     }
+  private void Update()
+  {
+    rb.velocity = velocityVector;
+    animator.SetFloat("Speed", rb.velocity.magnitude);
 
-     private void Update()
-     {
-        if (Input.GetKeyDown(KeyCode.Space))
-            bombSpawner.Spawn();
-
-        animator.SetFloat("Speed", rb.velocity.magnitude);
-
-        if (rb.velocity.x > 0.1)
-            GetComponent<SpriteRenderer>().flipX = false;
-        if (rb.velocity.x < -0.1)
-            GetComponent<SpriteRenderer>().flipX = true;
-     }
+    if (rb.velocity.x > 0.1)
+      GetComponent<SpriteRenderer>().flipX = false;
+    if (rb.velocity.x < -0.1)
+      GetComponent<SpriteRenderer>().flipX = true;
+  }
 }
